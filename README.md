@@ -52,4 +52,7 @@ python main.py
 
 This project is a work in progress, and bugs may exist. While the script performs its intended function, it may encounter issues on certain websites or with specific types of data. Please use this tool with caution.
 
-**Do not abuse this scraper.** Always respect the website's Terms of Service. Excessive scraping or failure to follow a website's usage policies could lead to your IP being blocked or legal consequences. Use the tool responsibly and consider limiting the frequency of requests to avoid overloading the server.
+**Do not abuse this scraper.** Always respect the website's Terms of Service. Excessive scraping or failure to follow a website's usage policies could lead to your IP being blocked or legal consequences. Use the tool responsibly, and consider limiting the frequency of requests to avoid overloading the server.
+
+**Disclaimer:** This script is provided "as is," and the author does not accept any responsibility for any issues that arise from its use. Use this script at your own risk, and make sure to comply with the website's Terms of Service and legal requirements. The author is not liable for any damages, consequences, or legal issues resulting from the use of this script.
+
