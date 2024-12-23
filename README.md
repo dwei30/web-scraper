@@ -39,13 +39,12 @@ Open your terminal and run the script by executing the following command:
 ```bash
 python main.py
 ```
-2. Enter the URL: When prompted, input the URL of the job listing page you wish to scrape.
-3. Data Extraction: The script will begin scraping the job listings from the provided URL. For the code specifically, it will collect:
-
-    Job Name
-    Location
-    Phone Number
-    Job URL
+2. Enter the URL: When prompted, input the URL of the listing page you wish to scrape.
+3. Data Extraction: The script will begin scraping the page listings from the provided URL. For the code specifically, it will collect:
+    - Page Name
+    - Location
+    - Phone Number
+    - Page URL
 4. CSV Output: The extracted data will be written to a file named postings.csv. If the file already exists, the data will be appended to it.
 5. If the site has multiple pages, the script will automatically navigate to the next page and continue scraping until there are no more pages.
 
