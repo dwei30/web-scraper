@@ -2,7 +2,7 @@
 
 This is a Python-based web scraper that extracts data from a given URL and writes this data to a CSV file. The scraper uses `Selenium` for navigating and interacting with the web page and `BeautifulSoup` for parsing the page's HTML content. This code is designed speciafically to retrieve multiple job listings from a given URL.
 
-> **Note**: This script is specifically designed to work with [https://www.babymap.hk/explore/](https://www.babymap.hk/explore/). If you wish to use this scraper on a different website, you will likely need to modify the script to account for differences in the website's structure and HTML elements.
+> **Note**: This script is specifically designed to work with [https://www.babymap.hk/](https://www.babymap.hk/explore/). If you wish to use this scraper on a different website, you will likely need to modify the script to account for differences in the website's structure and HTML elements.
 
 ## Features
 
