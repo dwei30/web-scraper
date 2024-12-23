@@ -7,10 +7,35 @@ from selenium.webdriver.support import expected_conditions as EC
 import requests
 import time
 
+# URL valid checker
+
+def isValidUrl(url):
+    return url.startswith('http://') or url.startswith('https://')
+
 # Load webpage to get results
 
+print('''
+ __          __  _     _____                                
+ \ \        / / | |   / ____|                               
+  \ \  /\  / /__| |__| (___   ___ _ __ __ _ _ __   ___ _ __ 
+   \ \/  \/ / _ \ '_ \\___ \ / __| '__/ _` | '_ \ / _ \ '__|
+    \  /\  /  __/ |_) |___) | (__| | | (_| | |_) |  __/ |   
+     \/  \/ \___|_.__/_____/ \___|_|  \__,_| .__/ \___|_|   
+                                           | |              
+                                           |_|              '''
+      )
+
 print('\nThis is experimental, please use with caution!\n')
-inputURL = input("Please enter URL: ")
+
+# Get URL from user and validate
+while True:
+    inputURL = input("Please enter a valid URL: ")
+    
+    if not isValidUrl(inputURL):
+        print("Invalid URL. Please try again.")
+    else:
+        break
+
 
 driver = webdriver.Chrome()
 driver.get(inputURL)
@@ -19,7 +44,7 @@ all_postings = []
 
 # Set up CSV file to save data written
 csvFile = 'postings.csv'
-csv_headers = ['Name', 'Location', 'Phone Number']
+csv_headers = ['Name', 'Location', 'Phone Number', 'URL']
 
 try:
     with open(csvFile, 'r', encoding='utf-8'):
@@ -94,8 +119,8 @@ while True:
 
             with open(csvFile, 'a', newline='', encoding='utf-8') as f:
                 writer = csv.writer(f)
-                writer.writerow([postName, location, phoneNumber]) 
-                print(f'{postName}, {location}, {phoneNumber}')
+                writer.writerow([postName, location, phoneNumber, post_url]) 
+                print(f'{postName}, {location}, {phoneNumber}, {post_url}')
 
         except Exception as e:
             print(f'Error processing posting: {e}')
