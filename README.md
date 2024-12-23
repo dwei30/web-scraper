@@ -23,6 +23,8 @@ You can install the required Python libraries using `pip`:
 
 ```bash
 pip install selenium beautifulsoup4
+```
+
 
 # DISCLAIMER
 
