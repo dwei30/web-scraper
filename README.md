@@ -19,7 +19,7 @@ Before running the script, ensure you have the following installed:
 - Python 3.x
 - [Selenium](https://pypi.org/project/selenium/)
 - [BeautifulSoup](https://pypi.org/project/beautifulsoup4/)
-- [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/) (Make sure the ChromeDriver version matches your installed Chrome browser version)
+- [ChromeDriver](https://developer.chrome.com/docs/chromedriver) (Make sure the ChromeDriver version matches your installed Chrome browser version)
 
 You can install the required Python libraries using `pip`:
 
