@@ -1,6 +1,6 @@
 # Web Scraper
 
-This is a Python-based web scraper that extracts data from a given URL and writes this data to a CSV file. The scraper uses `Selenium` for navigating and interacting with the web page and `BeautifulSoup` for parsing the page's HTML content. This code is designed speciafically to retrieve multiple job listings from a given URl.
+This is a Python-based web scraper that extracts data from a given URL and writes this data to a CSV file. The scraper uses `Selenium` for navigating and interacting with the web page and `BeautifulSoup` for parsing the page's HTML content. This code is designed speciafically to retrieve multiple job listings from a given URL.
 
 ## Features
 
@@ -23,3 +23,7 @@ You can install the required Python libraries using `pip`:
 
 ```bash
 pip install selenium beautifulsoup4
+
+# DISCLAIMER
+
+This project is a work in progress, and bugs may exist. While the script performs its intended function to extract job listings, it may encounter issues on certain websites or with specific types of data. Please use this tool with caution, and feel free to report any issues or suggestions for improvement.
