@@ -48,7 +48,7 @@ python main.py
 4. CSV Output: The extracted data will be written to a file named postings.csv. If the file already exists, the data will be appended to it.
 5. If the site has multiple pages, the script will automatically navigate to the next page and continue scraping until there are no more pages.
 
-# DISCLAIMER
+# Disclaimer
 
 This project is a work in progress, and bugs may exist. While the script performs its intended function, it may encounter issues on certain websites or with specific types of data. Please use this tool with caution.
 
