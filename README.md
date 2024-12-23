@@ -10,7 +10,7 @@ This is a Python-based web scraper that extracts data from a given URL and write
 - **Page Load Wait**: Waits for the page to load fully before extracting data.
 - **Error Handling**: Retries pages that fail to load within the specified timeout.
 - **CSV Output**: Outputs the scraped data to a CSV file for easy data handling.
-- **Multiple page handling**: Supports navigating through multiple pages if the site contains more job listings.
+- **Multiple Page Handling**: Supports navigating through multiple pages if the site contains more job listings.
 
 ## Requirements
 
