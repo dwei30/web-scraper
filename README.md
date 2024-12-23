@@ -28,4 +28,4 @@ pip install selenium beautifulsoup4
 
 # DISCLAIMER
 
-This project is a work in progress, and bugs may exist. While the script performs its intended function to extract job listings, it may encounter issues on certain websites or with specific types of data. Please use this tool with caution, and feel free to report any issues or suggestions for improvement.
+This project is a work in progress, and bugs may exist. While the script performs its intended function to extract job listings, it may encounter issues on certain websites or with specific types of data. Please use this tool with caution.
