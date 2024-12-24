@@ -36,7 +36,7 @@ print('''
  __          __  _     _____                                
  \ \        / / | |   / ____|                               
   \ \  /\  / /__| |__| (___   ___ _ __ __ _ _ __   ___ _ __ 
-   \ \/  \/ / _ \ '_  \\___ \ / __| '__/ _` | '_ \ / _ \ '__|
+   \ \/  \/ / _ \ '_  \___ \ / __| '__/ _` | '_ \ / _ \ '__|
     \  /\  /  __/ |_) |___) | (__| | | (_| | |_) |  __/ |   
      \/  \/ \___|_.__/_____/ \___|_|  \__,_| .__/ \___|_|   
                                            | |              
@@ -109,7 +109,7 @@ while True:
     # Grab HTML and parse (Change selectors based on the website's HTML structure)
     html_text = driver.page_source
     soup = BeautifulSoup(html_text, 'lxml')
-    
+
    # Adjust the selector below to match the container holding the data on the target website
     centrePostings = soup.find_all('div', class_='col-md-12 grid-item')
 
