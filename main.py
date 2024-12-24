@@ -5,6 +5,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import WebDriverException
+
 
 # URL validation function
 def isValidUrl(url):
@@ -13,16 +15,21 @@ def isValidUrl(url):
 # Get URL from user and validate
 while True:
     inputURL = input("Please enter a valid URL: ")
+    
     if not isValidUrl(inputURL):
         print("Invalid URL. Please try again. (Must include http:// or https://)")
-    else:
-        break
+        continue
 
-# Initialize the web driver (Make sure to have ChromeDriver installed)
-# If using a different browser, replace 'webdriver.Chrome()' with the relevant driver
-# and ensure the driver is compatible with the browser version.driver = webdriver.Chrome()
-driver = webdriver.Chrome()
-driver.get(inputURL)
+    # Initialize the web driver (Make sure to have ChromeDriver installed)
+    # If using a different browser, replace 'webdriver.Chrome()' with the relevant driver
+    # and ensure the driver is compatible with the browser version.driver = webdriver.Chrome()
+    try:
+        driver = webdriver.Chrome()
+        driver.get(inputURL)
+        break
+    except WebDriverException as e:
+        print("Error loading website. Please try again.")
+        driver.quit()
 
 # Display graphic and disclaimer
 print('''
@@ -36,7 +43,7 @@ print('''
                                            |_|              
 ''')
 
-print('This is experimental, things may break. Please use with caution, DO NOT ABUSE!')
+print('This is experimental, things may break. Please use with caution, DO NOT ABUSE!\n')
 
 # Check if the website loads
 try:
@@ -48,7 +55,7 @@ try:
         if startScraping == 'y':
             break
         elif startScraping == 'n':
-            print("Exiting program.")
+            print("Exiting program. Bye Bye.")
             driver.quit()
             exit()
         else:
@@ -77,6 +84,7 @@ def waitForPageLoad(driver, timeout=10, maxWaitTime = 20):
     startTime = time.time()
     while True:
         try:
+            # Adjust the CSS selector below based on the website's page structure
             WebDriverWait(driver, timeout).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, 'div.grid-item'))
             )
@@ -101,6 +109,8 @@ while True:
     # Grab HTML and parse (Change selectors based on the website's HTML structure)
     html_text = driver.page_source
     soup = BeautifulSoup(html_text, 'lxml')
+    
+   # Adjust the selector below to match the container holding the data on the target website
     centrePostings = soup.find_all('div', class_='col-md-12 grid-item')
 
     # Loop through all job postings (Modify based on data requirements and HTML layout)
