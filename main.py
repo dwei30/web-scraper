@@ -64,7 +64,7 @@ def waitForPageLoad(driver, timeout=10, maxWaitTime = 20):
             return True
         except Exception as e:
             if time.time() - startTime > maxWaitTime:
-                print(f"Timeout reached ({max_wait_time} seconds), retrying...")
+                print(f"Timeout reached ({maxWaitTime} seconds), retrying...")
                 return False
             time.sleep(1)
 
