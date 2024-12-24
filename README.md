@@ -4,14 +4,6 @@ This is a Python-based web scraper that extracts data from a given URL and write
 
 > **Note**: This script is specifically designed to work with [https://www.babymap.hk/](https://www.babymap.hk/explore/). If you wish to use this scraper on a different website, you will likely need to modify the script to account for differences in the website's structure and HTML elements.
 
-## Features
-
-- **URL Validation**: Ensures the input URL is valid before starting the scraping.
-- **Page Load Wait**: Waits for the page to load fully before extracting data.
-- **Error Handling**: Retries pages that fail to load within the specified timeout.
-- **CSV Output**: Outputs the scraped data to a CSV file for easy data handling.
-- **Multiple Page Handling**: Supports navigating through multiple pages if the site contains more job listings.
-
 ## Requirements
 
 Before running the script, ensure you have the following installed:
