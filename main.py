@@ -10,21 +10,55 @@ from selenium.webdriver.support import expected_conditions as EC
 def isValidUrl(url):
     return url.startswith('http://') or url.startswith('https://')
 
-# Load webpage to get results
-
 # Get URL from user and validate
 while True:
     inputURL = input("Please enter a valid URL: ")
     if not isValidUrl(inputURL):
-        print("Invalid URL. Please try again.")
+        print("Invalid URL. Please try again. (Must include http:// or https://)")
     else:
         break
 
-# Initialize the web driver
+# Initialize the web driver (Make sure to have ChromeDriver installed)
+# If using a different browser, replace 'webdriver.Chrome()' with the relevant driver
+# and ensure the driver is compatible with the browser version.driver = webdriver.Chrome()
 driver = webdriver.Chrome()
 driver.get(inputURL)
 
-# CSV setup
+# Display graphic and disclaimer
+print('''
+ __          __  _     _____                                
+ \ \        / / | |   / ____|                               
+  \ \  /\  / /__| |__| (___   ___ _ __ __ _ _ __   ___ _ __ 
+   \ \/  \/ / _ \ '_  \\___ \ / __| '__/ _` | '_ \ / _ \ '__|
+    \  /\  /  __/ |_) |___) | (__| | | (_| | |_) |  __/ |   
+     \/  \/ \___|_.__/_____/ \___|_|  \__,_| .__/ \___|_|   
+                                           | |              
+                                           |_|              
+''')
+
+print('This is experimental, things may break. Please use with caution, DO NOT ABUSE!')
+
+# Check if the website loads
+try:
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.TAG_NAME, 'body'))
+    )
+    while True:
+        startScraping = input("The website has loaded. Would you like to start? (y/n): ").strip().lower()
+        if startScraping == 'y':
+            break
+        elif startScraping == 'n':
+            print("Exiting program.")
+            driver.quit()
+            exit()
+        else:
+            print("Invalid input. Please enter 'y' or 'n'.")
+except Exception as e:
+    print("Error loading website. Exiting program.")
+    driver.quit()
+    exit()
+
+# CSV setup (Change the CSV filename or headers if needed for different data types)
 csvFile = 'postings.csv'
 csv_headers = ['Name', 'Location', 'Phone Number', 'URL']
 
@@ -37,21 +71,6 @@ except FileNotFoundError:
     with open(csvFile, 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerow(csv_headers)
-
-# Display graphic and disclaimer
-
-print('''
- __          __  _     _____                                
- \ \        / / | |   / ____|                               
-  \ \  /\  / /__| |__| (___   ___ _ __ __ _ _ __   ___ _ __ 
-   \ \/  \/ / _ \ '_  \\___ \ / __| '__/ _` | '_ \ / _ \ '__|
-    \  /\  /  __/ |_) |___) | (__| | | (_| | |_) |  __/ |   
-     \/  \/ \___|_.__/_____/ \___|_|  \__,_| .__/ \___|_|   
-                                           | |              
-                                           |_|              
-''')
-
-print('This is experimental, things may break. Please use with caution!')
 
 # Wait for page to load
 def waitForPageLoad(driver, timeout=10, maxWaitTime = 20):
@@ -79,34 +98,38 @@ while True:
         time.sleep(5)
         continue
 
-    # Grab HTML and parse
+    # Grab HTML and parse (Change selectors based on the website's HTML structure)
     html_text = driver.page_source
     soup = BeautifulSoup(html_text, 'lxml')
     centrePostings = soup.find_all('div', class_='col-md-12 grid-item')
 
-    # Loop through all job postings
+    # Loop through all job postings (Modify based on data requirements and HTML layout)
     for post in centrePostings:
         try:
 
+            # Extract name (Update tag and class to match the website)
             postName = post.find('h4', class_='case27-primary-text listing-preview-title').text.strip()
+            
+            # Extract location (Modify if website has different structure for categories)
             postCategories = post.find_all('span', class_='category-name')
-
             location = postCategories[1].text if len(postCategories) > 1 else "Unknown"
 
+            # Extract URL (Ensure the link structure matches the site, add base URL if necessary)
             post_url = post.find('a')['href']
             if not post_url.startswith("http"):
-                post_url = 'https://www.babymap.hk' + post_url
+                post_url = 'https://www.babymap.hk' + post_url  # Change base URL to match target website
 
+            # Navigate to the individual posting page
             driver.get(post_url)
-            time.sleep(1)  # Wait for page to load
+            time.sleep(1)  # Adjust wait time if page loading is slow
 
-            # Extract phone number from individual posting
+            # Extract phone number (Update CSS selector if the phone link structure differs)
             postPageHTML = driver.page_source
             postSoup = BeautifulSoup(postPageHTML, 'lxml')
             phoneLink = postSoup.select_one("a[href^='tel:']")
             phoneNumber = phoneLink['href'].replace('tel:', '').replace('%20', ' ') if phoneLink else "No phone number found"
 
-            # Write data to CSV
+            # Write data to CSV (Ensure headers match the data being scraped)
             with open(csvFile, 'a', newline='', encoding='utf-8') as f:
                 writer = csv.writer(f)
                 writer.writerow([postName, location, phoneNumber, post_url])
@@ -115,8 +138,8 @@ while True:
             print(f"Error processing posting: {e}")
             continue
 
-    # Find the 'next' button and navigate to the next page
-    nextButton = soup.find('a', rel='next')
+    # Find the 'next' button and navigate to the next page (Customize selector for pagination buttons)
+    nextButton = soup.find('a', rel='next') # Adjust based on website structure
     if not nextButton:
         print("\nNo more pages found.")
         break
@@ -124,10 +147,10 @@ while True:
         print("\nAdditional pages found.")
 
     # Get the next page URL and navigate
-    nextPageUrl = nextButton['href']
-
+    nextPageUrl = nextButton['href']    # Ensure the href attribute structure matches the site
     driver.get(nextPageUrl)
-    time.sleep(5)
+    driver.get(nextPageUrl)
+    time.sleep(5)   # Adjust wait time if next page loading is slow
 
 print('\nData has been written to CSV file.')
 print('Bye Bye.\n')
